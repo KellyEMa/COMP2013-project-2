@@ -5,7 +5,7 @@ import GroceriesAppContainer from "./Components/GroceriesAppContainer";
 function App() {
   return (
     <>
-      <GroceriesAppContainer products={products} />
+      <GroceriesAppContainer />
     </>
   );
 }
