@@ -1,4 +1,4 @@
-export default function ProductForm({name, brand, image, price, handleOnSubmit, handleOnChange}){
+export default function ProductForm({name, brand, image, price, handleOnSubmit, handleOnChange, isEdit}){
     
     return 
        ( 
@@ -13,6 +13,7 @@ export default function ProductForm({name, brand, image, price, handleOnSubmit, 
                   value={name}
                   onChange={handleOnChange}
                   placeholder="Enter a Name"
+                  required
                 />
                 <br/>
                 {/*Brand*/}
@@ -24,6 +25,7 @@ export default function ProductForm({name, brand, image, price, handleOnSubmit, 
                   value={brand}
                   onChange={handleOnChange}
                   placeholder="Enter the brand"
+                  required
                 />
                 {/*Image*/}
                 <label htmlFor="image">Image: </label>
@@ -33,7 +35,8 @@ export default function ProductForm({name, brand, image, price, handleOnSubmit, 
                   id="image"
                   value={image}
                   onChange={handleOnChange}
-                  placeholder="Enter an image"
+                  placeholder="Enter an image URL"
+                  required
                 />
                 {/*Price*/}
                  <label htmlFor="price">Price: </label>
@@ -44,8 +47,9 @@ export default function ProductForm({name, brand, image, price, handleOnSubmit, 
                   value={price}
                   onChange={handleOnChange}
                   placeholder="Enter price"
+                  required
                 />
-                <button>Submit</button>
+                <button>{isEdit? "Editing" : "Submit"}</button>
             </form>
         </div>
         )

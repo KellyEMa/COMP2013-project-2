@@ -39,7 +39,7 @@ server.get("/product", async (request, response) => {
     }
 });
 
-
+//to POST a new product
 server.post("/product", async (request, response) => {
 
     const {name, brand, image, price} = request.body
@@ -51,9 +51,49 @@ server.post("/product", async (request, response) => {
     });
     try{
         await newProduct.save();
-        response.status(200).send({message: "Product is added successfully"});
-
+        response.status(200).send(
+            {message: `Product is added successfully ${crypto.randomUUID()}`,
+        });
     }catch(error){
         response.status(400).send({message: error.message});
+    }
+});
+
+//To DELETE a product from DB by it's id 
+server.delete("/product/:id", async (response, request) => {
+    const {id} = request.params
+    try{
+        await Product.findByIdAndDelete(id)
+        response.send({message: `Product is deleted successfully with the id: ${id}`});
+    }catch(error){
+        response.status(400).send({message: error.message});
+    }
+});
+
+//To GET one product by id 
+server.get("/product/:id", async (request, response) => {
+    const {id} = request.params;
+    try{
+        const productToEdit = await Product.findById(id);
+        response.send(contactToEdit);
+    }catch (error) {
+        response.status(500).send({message: error.message});
+    }
+});
+
+//To PATCH a product by id 
+server.patch("/product/:id", async (request, response) => {
+    const {id} = request.params;
+    const {name, brand, image, price} = request.body;
+    try {
+        await Product.findByIdAndUpdate(id, {
+            name,
+            brand,
+            image,
+            price
+        });
+        response.send({message: `Contact has been updated with the id: ${id}`});
+    }catch (error){
+        response.status(500).send({message: error.message});
     }
 });

@@ -1,3 +1,4 @@
+import ProductFormApp from "./ProductFormApp";
 import QuantityCounter from "./QuantityCounter";
 
 export default function ProductCard({
@@ -9,6 +10,8 @@ export default function ProductCard({
   handleAddQuantity,
   handleRemoveQuantity,
   handleAddToCart,
+  handleOnDelete,
+  handleOnEdit,
   id,
 }) {
   return (
@@ -35,6 +38,8 @@ export default function ProductCard({
       />
       <h3>{price}</h3>
       <button onClick={() => handleAddToCart(id)}>Add to Cart</button>
+      <button onCLick={() => handleOnDelete(id)}>Delete</button>
+      <button onClick={() => handleOnEdit(id)}>Edit</button>
     </div>
   );
 }
