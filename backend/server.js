@@ -24,7 +24,6 @@ mongoose.connect(DB_URI).then(() => {
 
 //Routes
 //Root route
-
 server.get("/", (request, response) => {
     response.send("Server is Live!");
 });
@@ -36,6 +35,25 @@ server.get("/product", async (request, response) => {
         const products = await Product.find();
         response.send(products);
     }catch(error){
-        server.status(500).send({message: error.message});
+        response.status(500).send({message: error.message});
+    }
+});
+
+
+server.post("/product", async (request, response) => {
+
+    const {name, brand, image, price} = request.body
+    const newProduct = new Product({
+        name, 
+        brand,
+        image, 
+        price
+    });
+    try{
+        await newProduct.save();
+        response.status(200).send({message: "Product is added successfully"});
+
+    }catch(error){
+        response.status(400).send({message: error.message});
     }
 });
